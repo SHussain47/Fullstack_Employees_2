@@ -31,6 +31,7 @@ export async function getEmployees() {
     // 1. Returns promise form DB | 2. Destrucures objects and takes rows
     // 3. { rows: employees } renames rows to employees
     const { rows: employees } = await db.query(sql);
+    return employees;
   } catch (error) {
     console.error("Error with getEmployees function: ", error);
     throw error;
