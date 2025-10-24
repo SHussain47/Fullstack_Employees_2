@@ -24,6 +24,17 @@ export async function createEmployee({ name, birthday, salary }) {
 /** @returns all employees */
 export async function getEmployees() {
   // TODO
+  try {
+    const sql = `
+      SELECT * FROM employees
+    `;
+    // 1. Returns promise form DB | 2. Destrucures objects and takes rows
+    // 3. { rows: employees } renames rows to employees
+    const { rows: employees } = await db.query(sql);
+  } catch (error) {
+    console.error("Error with getEmployees function: ", error);
+    throw error;
+  }
 }
 
 /**

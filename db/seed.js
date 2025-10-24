@@ -8,6 +8,7 @@ console.log("🌱 Database seeded.");
 
 async function seedEmployees() {
   // TODO
+
   const employees = [
     {
       name: "Alice Johnson",
