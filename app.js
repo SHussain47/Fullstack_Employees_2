@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-export default app;
+
 import employeeRouter from "#api/employees";
 
 // TODO: this file!
@@ -15,3 +15,5 @@ app.use((error, req, res, next) => {
   console.error(error);
   res.status(500).send("Sorry, something went wrong");
 });
+
+export default app;

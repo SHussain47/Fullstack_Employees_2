@@ -44,6 +44,18 @@ export async function getEmployees() {
  */
 export async function getEmployee(id) {
   // TODO
+  try {
+    const sql = `
+      SELECT * FROM employees
+      WHERE id = $1;
+    `;
+    const values = [id];
+    const { rows } = await db.query(sql, values);
+    return rows[0];
+  } catch (error) {
+    console.error("Error with getEmployee(id) fucntion: ", error);
+    throw error;
+  }
 }
 
 /**
@@ -52,6 +64,22 @@ export async function getEmployee(id) {
  */
 export async function updateEmployee({ id, name, birthday, salary }) {
   // TODO
+  try {
+    const sql = `
+      UPDATE employees
+      SET name = $1,
+          birthday = $2,
+          salary = $3
+      WHERE id = $4
+      RETURNING *;
+    `;
+    const values = [name, birthday, salary, id];
+    const { rows } = await db.query(sql, values);
+    return rows[0];
+  } catch (error) {
+    console.error("Error with updateEmployee function: ", error);
+    throw error;
+  }
 }
 
 /**
@@ -60,4 +88,17 @@ export async function updateEmployee({ id, name, birthday, salary }) {
  */
 export async function deleteEmployee(id) {
   // TODO
+  try {
+    const sql = `
+    DELETE FROM employees
+    WHERE id = $1
+    RETURNING *;
+  `;
+    const values = [id];
+    const { rows } = await db.query(sql, values);
+    return rows[0];
+  } catch (error) {
+    console.error("Error with deleteEmployee function: ", error);
+    throw error;
+  }
 }
